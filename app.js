@@ -1,36 +1,62 @@
-// const btnGreat = document.querySelector('#btnGreat')
+// const username = document.getElementById("name")
+// const saludar = document.querySelector("#Saludar")
 
-// btnGreat.addEventListener('click', great)
+// saludar.addEventListener("click",great)
 
-// function great () {
-  //   alert(username.value)
-  // }
-  
-  const username = document.getElementById('nombre')
-  const data1 = document.getElementById('nota1')
-  const data2 = document.getElementById('nota2')
-  const data3 = document.getElementById('nota3')
-  const btnCalculate = document.getElementById('btn-calculate')
-  const response = document.getElementById('resultado')
-  
-  btnCalculate.addEventListener('click', calculateNote )
+// function great(){
+//     alert("hola como estas! mi estimado " + username.value)
+// }
 
-  function calculateNote(event) {
+
+const nombre= document.getElementById("nombre")
+const input1= document.getElementById("nota1")
+const input2= document.getElementById("nota2")
+const input3= document.getElementById("nota3")
+const calcular= document.querySelector("#calcular")
+const predecir= document.querySelector("#predecir")
+const resultado= document.getElementById("resultado")
+
+calcular.addEventListener("click",calc)
+predecir.addEventListener("click",prede)
+
+function calc(event){
 
     event.preventDefault()
 
-    let note1 = Number(data1.value)        
-    let note2 = Number(data2.value)        
-    let note3 = Number(data3.value)
+    let nota1= Number(input1.value)*0.3
+    let nota2= Number(input2.value)*0.3
+    let nota3= Number(input3.value)*0.4
+    let result= (nota1+nota2+nota3).toFixed(2)
+    resultado.style.color= "gray"
+   resultado.textContent= `SR/SRA/SRE ${nombre.value} su nota definitiva es: ${result}`
+
+   if (result<3.5) {
+      resultado.style.color= "black"
+   resultado.textContent= `SR/SRA/SRE ${nombre.value} su nota definitiva es: ${result} Perdio la materia`
     
-    let result = ((note1 * 0.3) + (note2 * 0.3) + (note3 * 0.4)).toFixed(2)
-    // template string o template literal
-    response.style.color = 'green'
-    response.textContent = `SR/SRA/SRE ${username.value} su nota definitiva es: ${result}`    
-  }
+   }
+   else if(result >3.5 && result<4.5){
+     resultado.style.color= "orange"
+   resultado.textContent= `SR/SRA/SRE ${nombre.value} su nota definitiva es: ${result} Gano la materia`
+   }
+   else if(result>4.5){
+         resultado.style.color= "green"
+   resultado.textContent= `SR/SRA/SRE ${nombre.value} su nota definitiva es: ${result} Su nota es sobresaliente`
 
-  
 
+   }
+}
 
-
-
+function prede(event){
+    event.preventDefault()
+    
+    let nota1= Number(input1.value)*0.3
+    let nota2= Number(input2.value)*0.3
+    let result= ((3.5-(nota1+nota2))/0.4).toFixed(2)
+    if(result<=5){
+      input3.value=`${result}`
+    }
+    else{
+      alert(`${result} necesita mas de 5 para pasar la materia, Perdio la materia`)
+    }
+}
